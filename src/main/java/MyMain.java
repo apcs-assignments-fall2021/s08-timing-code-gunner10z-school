@@ -18,8 +18,11 @@ public class MyMain {
     // makeRandomArray(5) => [0, 2, 2, 1, 3]
     // makeRandomArray(1) => [0]
     public static int[] makeRandomArray(int x) {
-        // YOUR CODE HERE
-        return new int[0];
+        int[] arr=new int[x];
+        for (int i:arr){
+            arr[i]=(int)(Math.random()*x);
+        }
+        return arr;
     }
 
     // *********
@@ -165,6 +168,7 @@ public class MyMain {
     public static void main(String[] args) {
         // A single trial of linear search vs. binary search
         int[] arr1 = makeRandomArray(10);
+        //System.out.println(arr1.toString());
         arr1 = mergeSort(arr1);
         int[] arr2 = copyArray(arr1);
 
@@ -188,25 +192,25 @@ public class MyMain {
 
         for (int i = 0; i < numTrials; i++) {
             // A single trial of linear search vs. binary search
-            int[] arr1Trial = makeRandomArray(1000);
-            arr1Trial = mergeSort(arr1Trial);
+            int[] arr1Trial = makeRandomArray(8000);
+            // arr1Trial = mergeSort(arr1Trial);
             int[] arr2Trial = copyArray(arr1Trial);
 
             long start1Trial = System.nanoTime();
-            linearSearch(arr1Trial, -1);
+            insertionSort(arr1Trial);
             long end1Trial = System.nanoTime();
 
             linearTotal += (end1Trial-start1Trial);
 
-            //System.out.println("Linear search: " + (end1Trial-start1Trial)  + " ns");
+            // System.out.println("Linear search: " + (end1Trial-start1Trial)  + " ns");
 
             long start2Trial = System.nanoTime();
-            binarySearch(arr2Trial, -1);
+            mergeSort(arr2Trial);
             long end2Trial = System.nanoTime();
 
             binaryTotal += (end2Trial-start2Trial);
 
-            //System.out.println("Binary search: " + (end2Trial-start2Trial)  + " ns");
+            // System.out.println("Binary search: " + (end2Trial-start2Trial)  + " ns");
         }
 
         System.out.println("Linear search: " + (linearTotal / numTrials)  + " ns on average");
